@@ -40,8 +40,3 @@ export class OpenApiBuilder<R = {}> {
     return this;
   }
 }
-
-new OpenApiBuilder('test')
-  .addJsonEndpoint('get', '/one')
-  .acceptsQueryParam('id', 'string')
-  .respondsWithObject(200, b => b);

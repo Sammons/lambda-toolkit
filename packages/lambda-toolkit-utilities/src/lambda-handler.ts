@@ -21,7 +21,13 @@ type ResponseBodyShape<S extends StatusCodes, ResponseShapes extends {}> = {
       };
 }[S];
 
-export const APISpecifications: OpenApiBuilder[] = [];
+// Dirty modify global to pin the reference, to be absolutely
+// sure its pinned across versions or clones of the node module
+const processContext: any = process as any;
+export const APISpecifications: OpenApiBuilder[] =
+  processContext['_APISpecifications'] ?? [];
+processContext['_APISpecifications'] = APISpecifications;
+
 function mergeIntoGlobal(api: OpenApiBuilder) {
   const existingMatchingApi = APISpecifications.find(spec => {
     return (
