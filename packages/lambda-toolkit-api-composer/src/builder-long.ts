@@ -1,8 +1,9 @@
 import * as J from './types-for-json-schema';
+import { RegisterKind } from 'modifier-wrappers';
 
 export class LongBuilder {
   _shape: number = null as any;
-  schema: J.JsonSchemaLong = {type: 'long'};
+  schema: J.JsonSchemaLong = { type: 'long' };
   withDescription(s: string) {
     this.schema.description = s;
     return this;
@@ -24,3 +25,5 @@ export class LongBuilder {
     return this;
   }
 }
+
+RegisterKind('long', LongBuilder);

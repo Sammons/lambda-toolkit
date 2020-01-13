@@ -1,8 +1,9 @@
 import * as J from './types-for-json-schema';
+import { RegisterKind } from 'modifier-wrappers';
 
 export class BoolBuilder {
   _shape: boolean = null as any;
-  schema: J.JsonSchemaBool = {type: 'boolean'};
+  schema: J.JsonSchemaBool = { type: 'boolean' };
   withDescription(s: string) {
     this.schema.description = s;
     return this;
@@ -12,3 +13,5 @@ export class BoolBuilder {
     return this;
   }
 }
+
+RegisterKind('boolean', BoolBuilder);

@@ -1,6 +1,6 @@
 import * as M from './type-maps';
 import * as J from './types-for-json-schema';
-import {ModifierWrappers, TypeToBuilderConstructor} from './modifier-wrappers';
+import { ModifierWrappers, TypeToBuilderConstructor, RegisterKind } from './modifier-wrappers';
 
 type ArrayZeroIfArray<T> = T extends Array<infer K> ? K : T;
 
@@ -8,7 +8,7 @@ export class ArrayBuilder<R = never> {
   _shape: R[] = null as any;
   schema: J.JsonSchemaArray = {
     type: 'array',
-    items: {type: 'string'},
+    items: { type: 'string' },
   };
 
   withItemType<
@@ -19,8 +19,8 @@ export class ArrayBuilder<R = never> {
     modifier?: Mod,
   ): ArrayBuilder<
     Mod extends never
-      ? ArrayZeroIfArray<ReturnType<typeof ModifierWrappers[Type]>['_shape']>
-      : ArrayZeroIfArray<ReturnType<Mod>['_shape']>
+    ? ArrayZeroIfArray<ReturnType<typeof ModifierWrappers[Type]>['_shape']>
+    : ArrayZeroIfArray<ReturnType<Mod>['_shape']>
   > {
     const b = modifier
       ? ModifierWrappers[type](modifier as any /** TODO */)
@@ -57,4 +57,6 @@ export class ArrayBuilder<R = never> {
 
 export type ExtractShapeFromArrayBuilder<
   A extends ArrayBuilder<any>
-> = A extends ArrayBuilder<infer Items> ? Items[] : never;
+  > = A extends ArrayBuilder<infer Items> ? Items[] : never;
+
+RegisterKind('array', ArrayBuilder);

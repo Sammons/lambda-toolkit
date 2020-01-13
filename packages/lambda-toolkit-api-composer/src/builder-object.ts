@@ -1,16 +1,17 @@
 import * as J from './types-for-json-schema';
 import * as M from './type-maps';
 import * as U from './type-utilities';
-import {ArrayBuilder} from './builder-array';
-import {StringBuilder} from './builder-string';
-import {DoubleBuilder} from './builder-double';
-import {LongBuilder} from './builder-long';
-import {BoolBuilder} from './builder-boolean';
+import { ArrayBuilder } from './builder-array';
+import { StringBuilder } from './builder-string';
+import { DoubleBuilder } from './builder-double';
+import { LongBuilder } from './builder-long';
+import { BoolBuilder } from './builder-boolean';
+import { RegisterKind } from 'modifier-wrappers';
 
 export class ObjectBuilder<R = {}> {
-  constructor() {}
+  constructor() { }
   public _shape: R = null as any;
-  public schema: J.JsonSchemaObject = {type: 'object'};
+  public schema: J.JsonSchemaObject = { type: 'object' };
   private addKeyToProperties(
     key: string,
     required: boolean,
@@ -166,3 +167,5 @@ export class ObjectBuilder<R = {}> {
     return this;
   }
 }
+
+RegisterKind('object', ObjectBuilder);

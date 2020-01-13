@@ -1,8 +1,9 @@
 import * as J from './types-for-json-schema';
+import { RegisterKind } from 'modifier-wrappers';
 
 export class StringBuilder {
   _shape: string = null as any;
-  schema: J.JsonSchemaString = {type: 'string'};
+  schema: J.JsonSchemaString = { type: 'string' };
   withPattern(s: string) {
     this.schema.pattern = s;
     return this;
@@ -24,3 +25,5 @@ export class StringBuilder {
     return this;
   }
 }
+
+RegisterKind('string', StringBuilder);

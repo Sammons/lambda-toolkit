@@ -1,8 +1,10 @@
 import * as J from './types-for-json-schema';
+import { ObjectBuilder } from 'index';
+import { RegisterKind } from 'modifier-wrappers';
 
 export class DoubleBuilder {
   _shape: number = null as any;
-  schema: J.JsonSchemaDouble = {type: 'double'};
+  schema: J.JsonSchemaDouble = { type: 'double' };
   withDescription(s: string) {
     this.schema.description = s;
     return this;
@@ -24,3 +26,5 @@ export class DoubleBuilder {
     return this;
   }
 }
+
+RegisterKind('object', ObjectBuilder);
