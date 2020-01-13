@@ -1,6 +1,6 @@
 {
   "name": "lambda-toolkit-utilities",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": {
     "name": "Ben Sammons"
   },
@@ -10,7 +10,7 @@
   "types": "build/index.d.ts",
   "scripts": {},
   "dependencies": {
-    "lambda-toolkit-api-composer": "0.0.x"
+    "lambda-toolkit-api-composer": "0.0.5"
   },
   "devDependencies": {
     "@types/aws-sdk": "^2.7.0",
