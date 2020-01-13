@@ -1,0 +1,14 @@
+{
+  "name": "lambda-toolkit-api-composer",
+  "version": "0.0.1",
+  "author": {
+    "name": "Ben Sammons"
+  },
+  "description": "Fluent typescript builder for constructing open-api definitions",
+  "license": "MIT",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
+}

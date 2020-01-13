@@ -1,0 +1,14 @@
+{
+  "name": "lambda-toolkit-utilities",
+  "version": "0.0.1",
+  "author": {
+    "name": "Ben Sammons"
+  },
+  "description": "Utility classes for writing typescript lambda code",
+  "license": "MIT",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
+}

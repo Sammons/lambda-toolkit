@@ -1,0 +1,21 @@
+{
+  "useTabs": false,
+  "tabWidth": 2,
+  "bracketSpacing": false,
+  "proseWrap": "never",
+  "singleQuote": true,
+  "trailingComma": "all",
+  "arrowParens": "avoid",
+  "semi": true,
+  "overrides": [
+    {
+      "excludeFiles": ["node_modules/**/*"],
+      "files": ["./**/*.ts", "./**/*.json"],
+      "options": {
+        "printWidth": 80,
+        "singleQuote": true,
+        "trailingComma": "es5"
+      }
+    }
+  ]
+}

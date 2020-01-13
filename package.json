@@ -1,0 +1,17 @@
+{
+  "name": "lambda-toolkit",
+  "description": "Build repository for lambda-toolkit modules",
+  "author": {
+    "name": "Ben Sammons"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -b --incremental packages/*",
+    "clean": "tsc -b --clean packages/*"
+  },
+  "devDependencies": {
+    "@types/node": "^13.1.4",
+    "prettier": "^1.19.1",
+    "typescript": "^3.7.4"
+  }
+}
