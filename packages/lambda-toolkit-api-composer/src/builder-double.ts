@@ -1,6 +1,6 @@
 import * as J from './types-for-json-schema';
 import { ObjectBuilder } from 'index';
-import { RegisterKind } from 'modifier-wrappers';
+import { RegisterKind } from './modifier-wrappers';
 
 export class DoubleBuilder {
   _shape: number = null as any;

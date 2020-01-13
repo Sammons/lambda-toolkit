@@ -6,7 +6,7 @@ import { StringBuilder } from './builder-string';
 import { DoubleBuilder } from './builder-double';
 import { LongBuilder } from './builder-long';
 import { BoolBuilder } from './builder-boolean';
-import { RegisterKind } from 'modifier-wrappers';
+import { RegisterKind } from './modifier-wrappers';
 
 export class ObjectBuilder<R = {}> {
   constructor() { }

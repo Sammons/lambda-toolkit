@@ -1,5 +1,5 @@
 import * as J from './types-for-json-schema';
-import { RegisterKind } from 'modifier-wrappers';
+import { RegisterKind } from './modifier-wrappers';
 
 export class BoolBuilder {
   _shape: boolean = null as any;
