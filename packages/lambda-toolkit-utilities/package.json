@@ -9,6 +9,8 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {},
-  "dependencies": {},
+  "dependencies": {
+    "lambda-toolkit-api-composer": "0.0.2"
+  },
   "devDependencies": {}
 }

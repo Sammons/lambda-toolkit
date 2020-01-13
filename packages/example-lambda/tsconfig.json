@@ -6,5 +6,8 @@
     "baseUrl": ".",
     "paths": {}
   },
-  "references": [{"path": "../lambda-toolkit-utilities"}]
+  "references": [
+    {"path": "../lambda-toolkit-utilities"},
+    {"path": "../lambda-toolkit-api-composer"}
+  ]
 }

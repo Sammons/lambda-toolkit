@@ -1,4 +1,4 @@
-import {LambdaHandler} from '../../lambda-toolkit-utilities';
+import {LambdaHandler} from 'lambda-toolkit-utilities';
 
 module.exports.handler = new LambdaHandler({
   project: 'test',

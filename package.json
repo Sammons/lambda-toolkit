@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc -b --incremental packages/*",
-    "clean": "tsc -b --clean packages/*"
+    "clean": "tsc -b --clean packages/*",
+    "publish-packages": "cd lambda-toolkit-api-composer && npm publish && cd - && cd lambda-toolkit-utilities && npm publish"
   },
   "devDependencies": {
     "@types/node": "^13.1.4",

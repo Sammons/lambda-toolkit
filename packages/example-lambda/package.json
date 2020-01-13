@@ -1,5 +1,7 @@
 {
   "main": "build/index.js",
   "types": "build/index.d.ts",
-  "dependencies": {}
+  "dependencies": {
+    "lambda-toolkit-utilities": "0.0.1"
+  }
 }

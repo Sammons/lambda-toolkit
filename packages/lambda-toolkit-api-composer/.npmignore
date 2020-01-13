@@ -1,0 +1,5 @@
+tsconfig.tsbuildinfo
+tsconfig.json
+src
+*.tgz
+.npmignore

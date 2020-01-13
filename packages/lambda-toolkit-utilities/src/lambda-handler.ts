@@ -4,7 +4,7 @@ import {
   OpenApiOperationBuilder,
   OpenApiOperations,
   StatusCodes,
-} from '../../lambda-toolkit-api-composer';
+} from 'lambda-toolkit-api-composer';
 import {LambdaCognitoApiEvent} from './lambda-cognito-api-event';
 import {PrimitiveTypeMap} from './type-maps';
 

@@ -8,6 +8,7 @@
   },
   "references": [
     {"path": "../example-lambda"},
-    {"path": "../lambda-toolkit-utilities"}
+    {"path": "../lambda-toolkit-utilities"},
+    {"path": "../lambda-toolkit-api-composer"}
   ]
 }
