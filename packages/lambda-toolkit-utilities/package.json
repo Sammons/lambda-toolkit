@@ -1,6 +1,6 @@
 {
   "name": "lambda-toolkit-utilities",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "author": {
     "name": "Ben Sammons"
   },
@@ -13,6 +13,7 @@
     "lambda-toolkit-api-composer": "0.0.3"
   },
   "devDependencies": {
+    "@types/aws-sdk": "^2.7.0",
     "@types/node": "^13.1.6"
   }
 }

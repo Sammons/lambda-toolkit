@@ -1,7 +1,7 @@
 import { Dynamoify } from './dynamo-converter';
-
+import { DynamoDB } from 'aws-sdk'
 export class DynamoSlim {
-  constructor(private table: string, private dynamo: any) { }
+  constructor(private table: string, private dynamo: DynamoDB) { }
   // TODO: handle capacity exception
   private async batchWrite<T>(table: string, items: Array<T>) {
     while (items.length > 0) {
@@ -75,11 +75,7 @@ export class DynamoSlim {
       return undefined;
     };
     const searchKeys = Object.keys(keys);
-    if (!searchKeys.some(k => gsiColumns.includes(k) || keyColumns.includes(k))) {
-      throw new Error('Invalid query since no key to use');
-    }
     let indexName = identifyIndex(searchKeys.find(k => gsiColumns.includes(k)));
-
     const keySearchKeys = searchKeys.filter(k => gsiColumns.includes(k) || keyColumns.includes(k));
     const filterKeys = searchKeys.filter(k => !gsiColumns.includes(k) && !keyColumns.includes(k));
     const names = {} as { [key: string]: any };
@@ -105,14 +101,24 @@ export class DynamoSlim {
     const {
       expression: filterConditionExpression,
     } = generateExpression(filterKeys);
-    const res = await this.dynamo.query({
-      TableName: this.table,
-      KeyConditionExpression: keyConditionExpression,
-      ExpressionAttributeValues: values,
-      ExpressionAttributeNames: names,
-      FilterExpression: filterConditionExpression,
-      IndexName: indexName
-    }).promise();
-    return res.Items;
+    if (keySearchKeys.length > 0) {
+      const res = await this.dynamo.query({
+        TableName: this.table,
+        KeyConditionExpression: keyConditionExpression,
+        ExpressionAttributeValues: values,
+        ExpressionAttributeNames: names,
+        FilterExpression: filterConditionExpression,
+        IndexName: indexName
+      }).promise();
+      return res.Items;
+    } else {
+      const res = await this.dynamo.scan({
+        TableName: this.table,
+        FilterExpression: filterConditionExpression,
+        ExpressionAttributeNames: names,
+        ExpressionAttributeValues: values
+      }).promise();
+      return res.Items;
+    }
   }
 }
