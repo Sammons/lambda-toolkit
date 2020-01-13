@@ -5,20 +5,20 @@ import {
   OpenApiOperations,
   StatusCodes,
 } from 'lambda-toolkit-api-composer';
-import {LambdaCognitoApiEvent} from './lambda-cognito-api-event';
-import {PrimitiveTypeMap} from './type-maps';
+import { LambdaCognitoApiEvent } from './lambda-cognito-api-event';
+import { PrimitiveTypeMap } from './type-maps';
 
 type ResponseBodyShape<S extends StatusCodes, ResponseShapes extends {}> = {
-  [K in S]: ResponseShapes extends {[K2 in K]: infer Shape}
-    ? {
-        statusCode: K;
-        body: Shape;
-        headers?: {[key: string]: string};
-      }
-    : {
-        statusCode: K;
-        headers?: {[key: string]: string};
-      };
+  [K in S]: ResponseShapes extends { [K2 in K]: infer Shape }
+  ? {
+    statusCode: K;
+    body: Shape;
+    headers?: { [key: string]: string };
+  }
+  : {
+    statusCode: K;
+    headers?: { [key: string]: string };
+  };
 }[S];
 
 // Dirty modify global to pin the reference, to be absolutely
@@ -85,7 +85,7 @@ export class LambdaHandler<
   ResponseShapes = {},
   Url extends string = never,
   Op extends OpenApiOperations = never
-> {
+  > {
   private api: OpenApiBuilder;
   private endpoint: OpenApiOperationBuilder<{}, Url, Op>;
   constructor(
@@ -112,7 +112,7 @@ export class LambdaHandler<
   ): LambdaHandler<
     RequestBody,
     RequestHeaders,
-    RequestQueryParams & {[Name in N]: PrimitiveTypeMap[Kind]},
+    RequestQueryParams & { [Name in N]: PrimitiveTypeMap[Kind] },
     ResponseShapes,
     Url,
     Op
@@ -132,8 +132,8 @@ export class LambdaHandler<
   acceptsBoolQueryParam<N extends string>(name: N) {
     return this.acceptsQueryParam(name, 'boolean');
   }
-  private headerOverrides: {[key: number]: {[key: string]: string}} = {};
-  setsHeaders(statuses: number[], headers: {[key: string]: string}) {
+  private headerOverrides: { [key: number]: { [key: string]: string } } = {};
+  setsHeaders(statuses: number[], headers: { [key: string]: string }) {
     for (let status of statuses) {
       this.endpoint.respondsWithHeaderValues(status as StatusCodes, headers);
       this.headerOverrides[status] = headers;
@@ -151,9 +151,9 @@ export class LambdaHandler<
     RequestHeaders,
     RequestQueryParams,
     ResponseShapes &
-      {
-        [K in S]: ReturnType<F>['_shape'];
-      },
+    {
+      [K in S]: ReturnType<F>['_shape'];
+    },
     Url,
     Op
   > {
@@ -229,6 +229,13 @@ export class LambdaHandler<
         );
         result.then(result => {
           const status = result.statusCode;
+          if (Object.keys(result).includes('body')) {
+            (result as any)['body'] = JSON.stringify((result as any)['body']);
+            if (result.headers == null) {
+              result.headers = {};
+            }
+            result.headers['Content-Type'] = 'application/json'
+          }
           if (this.headerOverrides[status] != null) {
             const keys = Object.keys(this.headerOverrides[status]);
             if (result.headers == null) {

@@ -6,6 +6,7 @@
   },
   "license": "MIT",
   "scripts": {
+    "install": "cd packages/lambda-toolkit-api-composer && npm i && cd ../lambda-toolkit-utilities && npm i",
     "build": "tsc -b --incremental packages/*",
     "clean": "tsc -b --clean packages/*",
     "publish-packages": "cd lambda-toolkit-api-composer && npm publish && cd - && cd lambda-toolkit-utilities && npm publish"
