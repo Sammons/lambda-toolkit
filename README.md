@@ -30,7 +30,7 @@ module.exports.handler = new LambdaHandler({
   .processesEventWith((event, context) => {
     return {
       statusCode: 200,
-      body: {message: e.queryStringParameters.id},
+      body: {message: event.queryStringParameters.id},
     };
   });
 ```
