@@ -221,7 +221,7 @@ export class LambdaHandler<
         if (this.registeredHandlers.length === 0) {
           throw new Error('Missing handler');
         }
-        if (event.body != null) {
+        if (event.body != null && typeof event.body === 'string') {
           event.body = JSON.parse(event.body);
         }
         const result = Promise.resolve(

@@ -1,5 +1,4 @@
 import * as J from './types-for-json-schema';
-import { ObjectBuilder } from 'index';
 import { RegisterKind } from './modifier-wrappers';
 
 export class DoubleBuilder {
@@ -27,4 +26,4 @@ export class DoubleBuilder {
   }
 }
 
-RegisterKind('object', ObjectBuilder);
+RegisterKind('object', DoubleBuilder);
