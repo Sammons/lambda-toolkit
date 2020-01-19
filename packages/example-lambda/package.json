@@ -3,5 +3,8 @@
   "types": "build/index.d.ts",
   "dependencies": {
     "lambda-toolkit-utilities": "0.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^13.1.8"
   }
 }

@@ -1,18 +1,18 @@
 import * as J from './types-for-json-schema';
 import { RegisterKind } from './modifier-wrappers';
 
-export class LongBuilder {
+export class NumberBuilder {
   _shape: number = null as any;
-  schema: J.JsonSchemaLong = { type: 'integer', format: 'int64' };
+  schema: J.JsonSchemaNumber = { type: 'number' };
   withDescription(s: string) {
     this.schema.description = s;
     return this;
   }
-  withMin<S extends J.JsonSchemaLong['minimum']>(s: S) {
+  withMin<S extends J.JsonSchemaDouble['minimum']>(s: S) {
     this.schema.minimum = s;
     return this;
   }
-  withMax<S extends J.JsonSchemaLong['maximum']>(s: S) {
+  withMax<S extends J.JsonSchemaDouble['maximum']>(s: S) {
     this.schema.maximum = s;
     return this;
   }
@@ -26,4 +26,4 @@ export class LongBuilder {
   }
 }
 
-RegisterKind('long', LongBuilder);
+RegisterKind('object', NumberBuilder);

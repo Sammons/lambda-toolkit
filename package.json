@@ -12,7 +12,7 @@
     "publish-packages": "cd lambda-toolkit-api-composer && npm publish && cd - && cd lambda-toolkit-utilities && npm publish"
   },
   "devDependencies": {
-    "@types/node": "^13.1.4",
+    "@types/node": "^13.1.8",
     "prettier": "^1.19.1",
     "typescript": "^3.7.4"
   }

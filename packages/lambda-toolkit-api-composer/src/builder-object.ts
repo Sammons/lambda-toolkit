@@ -7,6 +7,7 @@ import { DoubleBuilder } from './builder-double';
 import { LongBuilder } from './builder-long';
 import { BoolBuilder } from './builder-boolean';
 import { RegisterKind } from './modifier-wrappers';
+import { NumberBuilder } from './builder-number';
 
 export class ObjectBuilder<R = {}> {
   constructor() { }
@@ -91,6 +92,26 @@ export class ObjectBuilder<R = {}> {
     modifier?: M.Mutators['long'],
   ): ObjectBuilder<U.MergeKeyType<R, Key, number>> {
     const b = modifier ? modifier(new LongBuilder()) : new LongBuilder();
+    this.addKeyToProperties(key, true, b.schema);
+    return this as any;
+  }
+
+  /** Number */
+
+  withOptionalNumber<Key extends string>(
+    key: Key,
+    modifier?: M.Mutators['number'],
+  ): ObjectBuilder<U.MergeOptionalKeyType<R, Key, number>> {
+    const b = modifier ? modifier(new NumberBuilder()) : new NumberBuilder();
+    this.addKeyToProperties(key, false, b.schema);
+    return this as any;
+  }
+
+  withNumber<Key extends string>(
+    key: Key,
+    modifier?: M.Mutators['number'],
+  ): ObjectBuilder<U.MergeKeyType<R, Key, number>> {
+    const b = modifier ? modifier(new NumberBuilder()) : new NumberBuilder();
     this.addKeyToProperties(key, true, b.schema);
     return this as any;
   }

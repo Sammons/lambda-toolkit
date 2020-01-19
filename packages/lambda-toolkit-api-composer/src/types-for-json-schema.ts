@@ -6,7 +6,19 @@ export type JsonSchemaBool = {
 };
 
 export type JsonSchemaLong = {
-  type: 'long';
+  type: 'integer';
+  format: 'int64';
+  description?: string;
+  minimum?: number;
+  maximum?: number;
+  enum?: number[];
+  default?: number;
+  nullable?: boolean;
+};
+
+export type JsonSchemaNumber = {
+  type: 'number';
+  format?: 'double' | 'float'
   description?: string;
   minimum?: number;
   maximum?: number;
@@ -16,7 +28,8 @@ export type JsonSchemaLong = {
 };
 
 export type JsonSchemaDouble = {
-  type: 'double';
+  type: 'number';
+  format: 'double'
   description?: string;
   minimum?: number;
   maximum?: number;
@@ -52,6 +65,7 @@ export type JsonSchemaElement =
   | JsonSchemaString
   | JsonSchemaLong
   | JsonSchemaDouble
+  | JsonSchemaNumber
   | JsonSchemaBool
   | JsonSchemaObject;
 

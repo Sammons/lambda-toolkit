@@ -3,7 +3,7 @@ import { RegisterKind } from './modifier-wrappers';
 
 export class DoubleBuilder {
   _shape: number = null as any;
-  schema: J.JsonSchemaDouble = { type: 'double' };
+  schema: J.JsonSchemaDouble = { type: 'number', format: 'double' };
   withDescription(s: string) {
     this.schema.description = s;
     return this;

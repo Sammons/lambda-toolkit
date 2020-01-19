@@ -12,7 +12,7 @@ export class ArrayBuilder<R = never> {
   };
 
   withItemType<
-    Type extends J.JsonSchemaElement['type'],
+    Type extends keyof M.Mutators,
     Mod extends M.Mutators[Type]
   >(
     type: Type,

@@ -12,7 +12,12 @@ type ResponseBodyShape<S extends StatusCodes, ResponseShapes extends {}> = {
   [K in S]: ResponseShapes extends { [K2 in K]: infer Shape }
   ? {
     statusCode: K;
-    body: Shape;
+    body: Shape
+    & {
+      [K3 in Exclude<keyof ResponseShapes, K>]: {
+        [K4 in Exclude<keyof ResponseShapes[K3], keyof Shape>]?: void
+      }
+    }[Exclude<keyof ResponseShapes, K>];
     headers?: { [key: string]: string };
   }
   : {

@@ -3,12 +3,17 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "build",
-    "baseUrl": "./",
-    "paths": {}
+    "baseUrl": "."
   },
   "references": [
-    {"path": "../example-lambda"},
-    {"path": "../lambda-toolkit-utilities"},
-    {"path": "../lambda-toolkit-api-composer"}
+    {
+      "path": "../example-lambda"
+    },
+    {
+      "path": "../lambda-toolkit-utilities"
+    },
+    {
+      "path": "../lambda-toolkit-api-composer"
+    }
   ]
 }

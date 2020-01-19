@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "lambda-toolkit-utilities": "0.0.3"
+    "@types/aws-sdk": "^2.7.0",
+    "lambda-toolkit-utilities": "^0.0.13"
   }
 }
