@@ -1,6 +1,6 @@
 {
   "name": "lambda-toolkit",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Build repository for lambda-toolkit modules",
   "author": {
     "name": "Ben Sammons"

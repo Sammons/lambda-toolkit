@@ -2,7 +2,7 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "dependencies": {
-    "lambda-toolkit-utilities": "0.0.15"
+    "lambda-toolkit-utilities": "0.0.16"
   },
   "devDependencies": {
     "@types/node": "^13.1.8"
