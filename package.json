@@ -1,5 +1,6 @@
 {
   "name": "lambda-toolkit",
+  "version": "0.0.15",
   "description": "Build repository for lambda-toolkit modules",
   "author": {
     "name": "Ben Sammons"
@@ -8,10 +9,10 @@
   "scripts": {
     "install": "cd packages/lambda-toolkit-api-composer && npm i && cd ../lambda-toolkit-utilities && npm i",
     "build": "tsc -b --incremental packages/*",
-    "clean": "tsc -b --clean packages/*",
-    "publish-packages": "cd lambda-toolkit-api-composer && npm publish && cd - && cd lambda-toolkit-utilities && npm publish"
+    "clean": "tsc -b --clean packages/*"
   },
-  "devDependencies": {
+  "devDependencies": {},
+  "dependencies": {
     "@types/node": "^13.1.8",
     "prettier": "^1.19.1",
     "typescript": "^3.7.4"

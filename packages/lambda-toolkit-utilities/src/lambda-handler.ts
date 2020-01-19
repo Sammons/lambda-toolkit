@@ -145,6 +145,14 @@ export class LambdaHandler<
     }
     return this;
   }
+  allowOrigins(statuses: number[], value: string[] | string) {
+    for (let status of statuses) {
+      this.endpoint.respondsWithHeaderValues(status as StatusCodes, {
+        'Access-Control-Allow-Origin': Array.isArray(value) ? value.join(', ') : value
+      });
+    }
+    return this;
+  }
   respondsWithJsonObject<
     S extends StatusCodes,
     F extends (b: ObjectBuilder) => ObjectBuilder

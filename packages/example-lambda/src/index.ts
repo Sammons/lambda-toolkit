@@ -7,26 +7,26 @@ module.exports.handler = new LambdaHandler({
   url: '/users',
   gen: true,
 })
+  .allowOrigins([200, 500], '*')
+  .acceptsBoolQueryParam('expand')
   .acceptsJsonObject(b => b.withString('echo'))
   .respondsWithJsonObject(200, b => b
-    .withString('message')
+    .withString('echo')
+    .withBoolean('expand')
     .withArray('values', v => v
-      .withItemType('double')))
+      .withItemType('number')))
   .respondsWithJsonObject(500, b => b
-    .withString('id').withLong('message'))
-  .setsHeaders([200], {
-    'Access-Control-Allow-Origin': '*',
-  })
+    .withString('message'))
   .processesEventWith((e, _) => {
     try {
       return {
         statusCode: 200,
-        body: { message: e.body.echo, values: [1] },
+        body: { echo: e.body.echo, values: [1], expand: e.queryStringParameters.expand },
       }
     } catch (e) {
       return {
         statusCode: 500,
-        body: { id: 'xyz', message: 1 }
+        body: { message: 'error' }
       }
     }
   });
