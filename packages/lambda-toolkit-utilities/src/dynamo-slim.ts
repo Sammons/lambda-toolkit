@@ -106,7 +106,7 @@ export class DynamoSlim {
         FilterExpression: filterConditionExpression,
         IndexName: indexName
       }).promise();
-      return res.Items;
+      return res.Items?.map(UnDynamoify);
     } else {
       const res = await this.dynamo.scan({
         TableName: this.table,
