@@ -71,8 +71,16 @@ export function UnDynamoify(item: any): any {
       Object.keys(item[kind]).forEach(key => {
         output[key] = UnDynamoify(item[kind][key]);
       });
+      return output;
     }
-    throw new Error(`Unexpected Dynamo Object Shap (kind ${kind})`);
+    // may not have top level object key
+    if (Array.isArray(item)) {
+      return UnDynamoify({ L: item });
+    }
+    if (typeof item === 'object') {
+      return UnDynamoify({ M: item });
+    }
+    throw new Error(`Unexpected Dynamo Object Shape (kind ${kind})`);
   }
   throw new Error('Unexpected Dynamo Object Shape (no keys)');
 }

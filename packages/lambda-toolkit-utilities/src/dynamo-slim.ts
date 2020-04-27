@@ -1,4 +1,4 @@
-import { Dynamoify } from './dynamo-converter';
+import { Dynamoify, UnDynamoify } from './dynamo-converter';
 import { DynamoDB } from 'aws-sdk'
 export class DynamoSlim {
   constructor(private table: string, private dynamo: DynamoDB) { }
@@ -6,25 +6,21 @@ export class DynamoSlim {
   private async batchWrite<T>(table: string, items: Array<T>) {
     while (items.length > 0) {
       const nextChunk = items.splice(0, 20);
-      console.log(JSON.stringify(nextChunk.map(item => {
-        return {
-          PutRequest: {
-            Item: Dynamoify(item)
-          }
-        };
-      })));
       let unprocessedItems = await this.dynamo.batchWriteItem({
         RequestItems: {
           [table]: nextChunk.map(item => {
             return {
               PutRequest: {
-                Item: Dynamoify(item)
+                Item: Array.isArray(item) ? Dynamoify(item) : Dynamoify<{}>(item)['M']
               }
             };
           }) as any[]
         }
       }).promise();
-      while (unprocessedItems.UnprocessedItems && unprocessedItems.UnprocessedItems[table].length > 0) {
+      while (unprocessedItems && unprocessedItems.UnprocessedItems
+        && unprocessedItems.UnprocessedItems[table]
+        // TODO verify this is correct
+        && unprocessedItems.UnprocessedItems[table].length > 0) {
         unprocessedItems = await this.dynamo.batchWriteItem({
           RequestItems: unprocessedItems.UnprocessedItems
         }).promise();
@@ -52,7 +48,7 @@ export class DynamoSlim {
       TableName: this.table,
       Key: keys
     }).promise();
-    return res.Item;
+    return UnDynamoify(res.Item);
   }
   private static descriptions = {} as { [key: string]: any };
   private async getDescription(): Promise<{ KeySchema: { AttributeName: string; }[]; GlobalSecondaryIndexes: { IndexName: string; KeySchema: { AttributeName: string }[] }[] }> {
@@ -118,7 +114,7 @@ export class DynamoSlim {
         ExpressionAttributeNames: names,
         ExpressionAttributeValues: values
       }).promise();
-      return res.Items;
+      return res.Items?.map(UnDynamoify);
     }
   }
 }
